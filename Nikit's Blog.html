@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nikit's Blog</title>
+  <link href="/normalize.css" rel="stylesheet">
+  <style>
+    header {
+      text-align: center;
+      background: url('http://dash.ga.co/assets/jeff-bg.png');
+      background-size: cover;
+      color: white;
+    }
+    a {
+      color: white;
+    }
+    h1 {
+      font-size: 70px;
+    }
+    img {
+      margin: 40px 0px 0px 0px;
+      border: 7px solid white;
+      border-radius: 0px;
+      height: 200px;
+    }
+    ul {
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    li {
+      display: inline;
+      padding: 0px 10px 0px 10px;
+    }
+    article {
+      max-width: 500px;
+      padding: 20px;
+      margin: 0 auto;
+    }
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 36px;
+        padding: 5px;
+      }
+      li {
+        padding: 5px;
+        display: block;
+      }
+    }
+
+    #searchInput {
+      padding: 10px;
+      border-radius: 0px; /* Corrected border-radius value */
+      border: 1px solid black; /* Corrected border property */
+      width: 100%; /* Adjusted width for better responsiveness */
+      box-sizing: border-box; /* Ensures padding is included in the width */
+      margin: 10px auto; /* Center the input */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <input type="text" id="searchInput" placeholder="Search My entries">
+    <img src="ImgForPic.jpg" alt="Header Image">
+    <h1>Nikit's Blog</h1>
+    <ul>
+      <li><a href="Nikit's Blog.html">Home</a></li>
+      <li><a href="About Me.html">About Me</a></li>
+      
+    </ul>
+  </header>
+  <section id="articles">
+    <!-- Content will be dynamically added here using JavaScript -->
+  </section>
+  <script>
+    const articles = [
+      {
+        title: "My New Article",
+        content: "<p>This is the content of my new article.</p>",
+        likeButton: "<button>Like</button>"
+      },
+      {
+        title: "Some Questions...",
+        content: "<p>Dark.</p>",
+        likeButton: "<button>Like</button>"
+      },
+      {
+        title: "Poem-Iron man",
+        content: "<p>I wrote this after watching endgame-A playboy in guise, with his fortune vast, A magic, by Ironman has been cast <br> .</p>",
+        likeButton: "<button>Like</button>"
+      },
+      {
+        title: "Poem-Humanity",
+        content: "<p>A tapestry of souls entwined.</p>",
+        likeButton: "<button>Like</button>"
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const articlesSection = document.getElementById("articles");
+
+    function displayArticles(filteredArticles = articles) {
+      articlesSection.innerHTML = ""; // Clear previous articles
+      filteredArticles.forEach(article => {
+        const articleElement = document.createElement("article");
+        articleElement.innerHTML = `<h2>${article.title}</h2> ${article.content} ${article.likeButton}`;
+        articlesSection.appendChild(articleElement);
+      });
+    }
+
+    displayArticles(); // Display all articles initially
+
+    searchInput.addEventListener("keyup", function() {
+      const searchTerm = this.value.toLowerCase();
+      const filteredArticles = articles.filter(article => article.title.toLowerCase().includes(searchTerm) || article.content.toLowerCase().includes(searchTerm));
+      displayArticles(filteredArticles);
+    });
+
+    // Add functionality to Like buttons (for example, to show an alert)
+    document.querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", function() {
+        alert("Clicked Like!");
+      });
+    });
+  </script>
+</body>
+</html>
